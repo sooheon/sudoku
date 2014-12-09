@@ -5,6 +5,33 @@
 
 (def all-values #{1 2 3 4 5 6 7 8 9})
 
+(defn value-at
+  "Takes coordinates and returns the value there."
+  [board coord]
+  (get-in board coord))
+
+(defn has-value?
+  "Returns true if coords contain a value."
+  [board coord]
+  (not= 0 (value-at board coord)))
+
+(defn row-values
+  "Returns the set of values in coords' row."
+  [board [row _]]
+  (set (get board row)))
+
+(defn col-values
+  "Returns the set of values in coords' col."
+  [board [_ col]]
+  (set (map (fn [x] (get x col)) board)))
+
+(defn coord-pairs 
+  "Returns the set of coordinates permutated from input." 
+  [coords]
+  (for [row coords
+        col coords]
+    [row col]))
+
 (def sudoku-board
   (board [[5 3 0 0 7 0 0 0 0]
           [6 0 0 1 9 5 0 0 0]
@@ -16,57 +43,44 @@
           [0 0 0 4 1 9 0 0 5]
           [0 0 0 0 8 0 0 7 9]]))
 
-(defn value-at [board coord]
-  (get-in board coord))
-
-(defn has-value? [board coord]
-  (not= 0 (value-at board coord)))
-
-(defn row-values [board [row _]]
-  (set (get board row)))
-
-(defn col-values [board [_ col]]
-  (set (map (fn [x] (get x col)) board)))
-
-(defn coord-pairs [coords]
-  (for [number [coords]]
-    number))
-
-(defn block-values [board coord]
-  nil)
+(defn block-values
+  "get top left, get coord pairs, get values"
+  [board coord]
+  (let [top-left (fn [ind] )]
+    (top-left-coords coord)))
 
 (defn valid-values-for [board coord]
-  nil)
+  )
 
 (defn filled? [board]
-  nil)
+  )
 
 (defn rows [board]
-  nil)
+  )
 
 (defn valid-rows? [board]
-  nil)
+  )
 
 (defn cols [board]
-  nil)
+  )
 
 (defn valid-cols? [board]
-  nil)
+  )
 
 (defn blocks [board]
-  nil)
+  )
 
 (defn valid-blocks? [board]
-  nil)
+  )
 
 (defn valid-solution? [board]
-  nil)
+  )
 
 (defn set-value-at [board coord new-value]
-  nil)
+  )
 
 (defn find-empty-point [board]
-  nil)
+  )
 
 (defn solve [board]
-  nil)
+  )
