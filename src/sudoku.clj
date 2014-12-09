@@ -20,18 +20,17 @@
   (get-in board coord))
 
 (defn has-value? [board coord]
-  (if (zero? (value-at board coord))
-    false
-    true))
+  (not= 0 (value-at board coord)))
 
-(defn row-values [board coord]
-  )
+(defn row-values [board [row _]]
+  (set (get board row)))
 
-(defn col-values [board coord]
-  nil)
+(defn col-values [board [_ col]]
+  (set (map (fn [x] (get x col)) board)))
 
 (defn coord-pairs [coords]
-  nil)
+  (for [number [coords]]
+    number))
 
 (defn block-values [board coord]
   nil)
