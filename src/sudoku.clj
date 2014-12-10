@@ -109,7 +109,9 @@
 (defn valid-blocks? [board]
   (every? valid? (cols board)))
 
-(defn valid-solution? [board]
+(defn valid-solution?
+  "Returns true of the board is a filled and valid solution, false otherwise."
+  [board]
   (and (valid-rows? board)
        (valid-cols? board)
        (valid-blocks? board)))
@@ -118,8 +120,22 @@
   (assoc-in board coord new-value))
 
 (defn find-empty-point [board]
-  (let [board-coords (coord-pairs (range 0 9))]
-    ))
+  (let [board-coords (coord-pairs (range 0 9))
+        board-map (zipmap board-coords (map #(value-at board %) board-coords))]
+    (->> board-map
+      (group-by val)
+      (#(get % 0))
+      (map key)
+      (first))))
+
+(defn solve-helper [board]
+  (if (valid-solution? board)
+    [board]
+    (let [empty-point (find-empty-point board)
+          valid-point-values (valid-values-for board empty-point)]
+      (for [value valid-point-values
+            solution (solve-helper (set-value-at board empty-point value))]
+        solution))))
 
 (defn solve [board]
-  )
+  (first (solve-helper board)))
